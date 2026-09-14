@@ -3,25 +3,33 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Trendify | Style Meets Trend</title>
+  <title>Trendify | Style Meets Everyday Life</title>
   <link rel="stylesheet" href="style.css">
-  <!-- Font Awesome for Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
+
+  <!-- Top Announcement Bar -->
+  <div class="top-bar">
+    <div><i class="fa-solid fa-truck-fast"></i> Free Shipping on Orders Over $50</div>
+    <div><i class="fa-solid fa-tag"></i> New Arrivals Every Week</div>
+    <div><i class="fa-solid fa-shield-halved"></i> 100% Secure Payment</div>
+  </div>
 
   <!-- Navigation Bar -->
   <nav class="navbar">
     <div class="logo">Trendify<span>.</span></div>
     <ul class="nav-links">
-      <li><a href="#home">Home</a></li>
+      <li><a href="#home" class="active">Home</a></li>
       <li><a href="#products">Shop</a></li>
       <li><a href="#categories">Categories</a></li>
+      <li><a href="#about">About</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
     <div class="nav-icons">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <i class="fa-regular fa-user"></i>
       <div class="cart-icon" onclick="toggleCart()">
         <i class="fa-solid fa-bag-shopping"></i>
         <span id="cart-count">0</span>
@@ -31,69 +39,171 @@
 
   <!-- Hero Section -->
   <section id="home" class="hero">
+    <div class="hero-overlay"></div>
     <div class="hero-content">
-      <h1>Upgrade Your Style With <span>Trendify</span></h1>
-      <p>Discover the latest fashion trends with premium quality and affordable prices.</p>
-      <a href="#products" class="btn">Shop Now</a>
+      <p class="subtitle">WELCOME TO TRENDIFY</p>
+      <h1>Style Meets <br><span>Everyday Life</span></h1>
+      <p class="desc">Discover the latest fashion trends with premium quality and affordable prices.</p>
+      <a href="#products" class="btn-primary">Shop Now <i class="fa-solid fa-arrow-right"></i></a>
     </div>
   </section>
 
-  <!-- Featured Categories -->
-  <section id="categories" class="categories">
-    <h2 class="section-title">Popular Categories</h2>
+  <!-- Popular Categories -->
+  <section id="categories" class="section">
+    <div class="section-header">
+      <h2>Popular Categories</h2>
+      <a href="#" class="view-all">View All <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
     <div class="category-grid">
-      <div class="category-card">
-        <h3>Men's Collection</h3>
+      <div class="cat-card">
+        <div class="cat-img"><img src="https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=300" alt="Men"></div>
+        <h4>Men's Collection</h4>
       </div>
-      <div class="category-card">
-        <h3>Women's Fashion</h3>
+      <div class="cat-card">
+        <div class="cat-img"><img src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=300" alt="Women"></div>
+        <h4>Women's Fashion</h4>
       </div>
-      <div class="category-card">
-        <h3>Trendy Accessories</h3>
+      <div class="cat-card">
+        <div class="cat-img"><img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=300" alt="Accessories"></div>
+        <h4>Accessories</h4>
+      </div>
+      <div class="cat-card">
+        <div class="cat-img"><img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=300" alt="Shoes"></div>
+        <h4>Shoes</h4>
+      </div>
+      <div class="cat-card">
+        <div class="cat-img"><img src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=300" alt="Bags"></div>
+        <h4>Bags</h4>
+      </div>
+      <div class="cat-card">
+        <div class="cat-img"><img src="https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=300" alt="Jeans"></div>
+        <h4>Jeans & Pants</h4>
       </div>
     </div>
   </section>
 
-  <!-- Products Section -->
-  <section id="products" class="products">
-    <h2 class="section-title">Trending Products</h2>
+  <!-- Trending Products Section -->
+  <section id="products" class="section">
+    <div class="section-header">
+      <h2>Trending Products</h2>
+      <div class="filter-tabs">
+        <button class="tab-btn active" onclick="filterProducts('all')">All</button>
+        <button class="tab-btn" onclick="filterProducts('men')">Men</button>
+        <button class="tab-btn" onclick="filterProducts('women')">Women</button>
+        <button class="tab-btn" onclick="filterProducts('accessories')">Accessories</button>
+      </div>
+    </div>
+
     <div class="product-grid" id="product-list">
-      <!-- Products will be dynamically added via JS -->
+      <!-- JavaScript dynamic render -->
     </div>
   </section>
 
-  <!-- Sliding Cart Drawer -->
+  <!-- Banner Offer Section -->
+  <section class="banner-section">
+    <div class="banner-content">
+      <p class="tag">LIMITED TIME OFFER</p>
+      <h2>Upgrade Your Style With <span>Trendify</span></h2>
+      <p>Premium quality. Affordable prices. Always.</p>
+      <a href="#products" class="btn-primary">Shop Now <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+  </section>
+
+  <!-- Trust Features -->
+  <section class="trust-features">
+    <div class="feature-item">
+      <i class="fa-solid fa-truck"></i>
+      <div>
+        <h4>Free Shipping</h4>
+        <p>On orders over $50</p>
+      </div>
+    </div>
+    <div class="feature-item">
+      <i class="fa-solid fa-shield-heart"></i>
+      <div>
+        <h4>Secure Payment</h4>
+        <p>100% safe & secure</p>
+      </div>
+    </div>
+    <div class="feature-item">
+      <i class="fa-solid fa-rotate-left"></i>
+      <div>
+        <h4>Easy Returns</h4>
+        <p>30 days return policy</p>
+      </div>
+    </div>
+    <div class="feature-item">
+      <i class="fa-solid fa-headset"></i>
+      <div>
+        <h4>24/7 Support</h4>
+        <p>We're here to help</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cart Drawer -->
   <div class="cart-drawer" id="cartDrawer">
     <div class="cart-header">
-      <h3>Your Shopping Bag</h3>
+      <h3>Shopping Bag</h3>
       <span class="close-btn" onclick="toggleCart()">&times;</span>
     </div>
-    <div class="cart-items" id="cartItems">
-      <p class="empty-cart">Your cart is currently empty.</p>
-    </div>
+    <div class="cart-items" id="cartItems"></div>
     <div class="cart-footer">
       <div class="total-price">
         <span>Total:</span>
         <span id="cartTotal">$0.00</span>
       </div>
-      <button class="btn checkout-btn">Checkout</button>
+      <button class="btn-primary checkout-btn">Checkout</button>
     </div>
   </div>
 
   <!-- Footer -->
-  <footer id="contact">
-    <div class="footer-content">
-      <div class="footer-brand">
+  <footer>
+    <div class="footer-top">
+      <div class="footer-col brand-col">
         <h2>Trendify<span>.</span></h2>
-        <p>Your one-stop destination for modern trends and streetwear.</p>
+        <p>Fashion for a better you.</p>
       </div>
-      <div class="social-links">
-        <a href="#"><i class="fa-brands fa-facebook"></i></a>
-        <a href="#"><i class="fa-brands fa-instagram"></i></a>
-        <a href="#"><i class="fa-brands fa-twitter"></i></a>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Shop</a></li>
+          <li><a href="#">Categories</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Categories</h4>
+        <ul>
+          <li><a href="#">Men's Collection</a></li>
+          <li><a href="#">Women's Fashion</a></li>
+          <li><a href="#">Shoes</a></li>
+          <li><a href="#">Accessories</a></li>
+          <li><a href="#">Bags</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Stay Connected</h4>
+        <div class="newsletter">
+          <input type="email" placeholder="Your email address">
+          <button>Subscribe</button>
+        </div>
+        <div class="social-icons">
+          <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#"><i class="fa-brands fa-youtube"></i></a>
+          <a href="#"><i class="fa-brands fa-tiktok"></i></a>
+        </div>
       </div>
     </div>
-    <p class="copyright">&copy; 2026 Trendify. All Rights Reserved.</p>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Trendify. All rights reserved.</p>
+      <div class="terms">
+        <a href="#">Terms & Conditions</a> | <a href="#">Privacy Policy</a>
+      </div>
+    </div>
   </footer>
 
   <script src="script.js"></script>

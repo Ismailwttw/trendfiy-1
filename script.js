@@ -1,59 +1,73 @@
-// Sample Products Data
 const products = [
-  { id: 1, name: "Casual Streetwear Hoodie", price: 49.99, image: "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?q=80&w=500" },
-  { id: 2, name: "Classic Denim Jacket", price: 69.99, image: "https://images.unsplash.com/photo-1576995853123-5a10305d93c0?q=80&w=500" },
-  { id: 3, name: "Minimalist Sneakers", price: 89.99, image: "https://images.unsplash.com/photo-1549298916-b41d501d3772?q=80&w=500" },
-  { id: 4, name: "Urban Cargo Pants", price: 54.99, image: "https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?q=80&w=500" }
+  { id: 1, name: "Classic Hoodie", cat: "men", categoryName: "Men's Collection", price: 34.99, oldPrice: 49.99, badge: "New", badgeClass: "new", rating: "4.8", image: "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=500" },
+  { id: 2, name: "Premium Polo Shirt", cat: "men", categoryName: "Men's Collection", price: 24.99, oldPrice: 39.99, badge: "Best Seller", badgeClass: "bestseller", rating: "4.7", image: "https://images.unsplash.com/photo-1581655353564-df123a1eb820?w=500" },
+  { id: 3, name: "Slim Fit Jeans", cat: "men", categoryName: "Jeans & Pants", price: 32.99, oldPrice: 54.99, badge: "Hot", badgeClass: "hot", rating: "4.6", image: "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=500" },
+  { id: 4, name: "Casual Sneakers", cat: "accessories", categoryName: "Shoes", price: 45.99, oldPrice: 69.99, badge: "Sale", badgeClass: "sale", rating: "4.8", image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500" }
 ];
 
 let cart = [];
 
-// Load products onto the page
-function loadProducts() {
+function renderProducts(items) {
   const productList = document.getElementById("product-list");
-  productList.innerHTML = products.map(product => `
+  productList.innerHTML = items.map(item => `
     <div class="product-card">
-      <img src="${product.image}" alt="${product.name}">
-      <div class="product-info">
-        <h3 class="product-title">${product.name}</h3>
-        <p class="product-price">$${product.price.toFixed(2)}</p>
-        <button class="btn" onclick="addToCart(${product.id})">Add to Cart</button>
+      <span class="badge ${item.badgeClass}">${item.badge}</span>
+      <div class="wishlist"><i class="fa-regular fa-heart"></i></div>
+      <img src="${item.image}" alt="${item.name}">
+      <div class="product-details">
+        <h4>${item.name}</h4>
+        <p class="product-cat">${item.categoryName}</p>
+        <div class="price-box">
+          <span class="price">$${item.price}</span>
+          <span class="old-price">$${item.oldPrice}</span>
+        </div>
+        <div class="stars">
+          <i class="fa-solid fa-star"></i> (${item.rating})
+        </div>
+        <button class="add-btn" onclick="addToCart(${item.id})"><i class="fa-solid fa-cart-shopping"></i> Add to Cart</button>
       </div>
     </div>
   `).join("");
 }
 
-// Toggle Cart Drawer
+function filterProducts(category) {
+  document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+  event.target.classList.add('active');
+  
+  if (category === 'all') {
+    renderProducts(products);
+  } else {
+    const filtered = products.filter(p => p.cat === category);
+    renderProducts(filtered);
+  }
+}
+
 function toggleCart() {
   document.getElementById("cartDrawer").classList.toggle("active");
 }
 
-// Add item to cart
-function addToCart(productId) {
-  const product = products.find(p => p.id === productId);
+function addToCart(id) {
+  const product = products.find(p => p.id === id);
   cart.push(product);
   updateCart();
 }
 
-// Update Cart Display
 function updateCart() {
+  document.getElementById("cart-count").innerText = cart.length;
   const cartItems = document.getElementById("cartItems");
-  const cartCount = document.getElementById("cart-count");
   const cartTotal = document.getElementById("cartTotal");
 
-  cartCount.innerText = cart.length;
-
-  if (cart.length === 0) {
-    cartItems.innerHTML = `<p class="empty-cart">Your cart is currently empty.</p>`;
+  if(cart.length === 0) {
+    cartItems.innerHTML = "<p>Your cart is empty.</p>";
     cartTotal.innerText = "$0.00";
     return;
   }
 
   cartItems.innerHTML = cart.map((item, index) => `
-    <div class="cart-item">
+    <div style="display:flex; justify-content:space-between; margin-bottom:10px;">
       <div>
         <h4>${item.name}</h4>
-        <p>$${item.price.toFixed(2)}</p>
+        <p>$${item.price}</p>
       </div>
       <span style="color:red; cursor:pointer;" onclick="removeFromCart(${index})">&times;</span>
     </div>
@@ -63,11 +77,9 @@ function updateCart() {
   cartTotal.innerText = `$${total.toFixed(2)}`;
 }
 
-// Remove item from cart
 function removeFromCart(index) {
   cart.splice(index, 1);
   updateCart();
 }
 
-// Initialize on page load
-loadProducts();
+renderProducts(products);
